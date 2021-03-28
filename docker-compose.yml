@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  database:
+      image: mysql:5.7
+      command: --default-authentication-plugin=mysql_native_password
+      container_name: proto-db
+      build:
+        context: .
+      ports:
+        - "3306:3306"
+      expose:
+        - 3306
+      volumes:
+        - ./mysql:/docker-entrypoint-initdb.d
+      environment:
+        MYSQL_DATABASE: protos
+        MYSQL_USER: user
+        MYSQL_PASSWORD: secret
+        MYSQL_ROOT_PASSWORD: secret
+
+  adminer:
+    image: adminer
+    environment: 
+        ADMINER_DEFAULT_SERVER: database
+    ports:
+      - 8080:8080
