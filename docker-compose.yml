@@ -1,23 +1,38 @@
 version: "3.9"
 
 services:
+  pmanager:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/protos?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: secret     
+    networks:
+      - backend
+
   database:
-      image: mysql:5.7
-      command: --default-authentication-plugin=mysql_native_password
-      container_name: proto-db
-      build:
-        context: .
-      ports:
-        - "3306:3306"
-      expose:
-        - 3306
-      volumes:
-        - ./mysql:/docker-entrypoint-initdb.d
-      environment:
-        MYSQL_DATABASE: protos
-        MYSQL_USER: user
-        MYSQL_PASSWORD: secret
-        MYSQL_ROOT_PASSWORD: secret
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: proto-db
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: protos
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - backend
 
   adminer:
     image: adminer
@@ -25,3 +40,11 @@ services:
         ADMINER_DEFAULT_SERVER: database
     ports:
       - 9090:8080
+    networks:
+      - backend
+
+volumes:
+  mysql:
+
+networks:
+    backend:
