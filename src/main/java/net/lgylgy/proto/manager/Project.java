@@ -1,5 +1,6 @@
 package net.lgylgy.proto.manager;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,17 +10,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "projects")
 public class Project {
-	private int projectID;
+	
+	@Column(name="project_id")
+	private Integer projectID;
+	
+	@Column(name="project_name")
 	private String projectName;
+	
 	private String description;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getProjectID() {
+	public Integer getProject_ID() {
 		return projectID;
 	}
 
-	public void setProjectID(int projectID) {
+	public void setProject_ID(Integer projectID) {
 		this.projectID = projectID;
 	}
 
