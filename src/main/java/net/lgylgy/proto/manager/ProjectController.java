@@ -39,7 +39,7 @@ public class ProjectController {
 		projectService.save(project);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/projects/{id}")
 	public ResponseEntity<?> update(@RequestBody Project user, @PathVariable Integer id) {
 		try {
 			Project project = projectService.get(id);
@@ -50,7 +50,7 @@ public class ProjectController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/projects/{id}")
 	public void delete(@PathVariable Integer id) {
 		projectService.delete(id);
 	}
