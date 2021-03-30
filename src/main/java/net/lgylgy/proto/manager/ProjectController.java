@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProjectController {
-	@Autowired
-	ProjectService projectService;
+    @Autowired
+    ProjectService projectService;
 
-	@GetMapping("/projects")
-	public List<Project> list() {
-		return projectService.listAll();
-	}
+    @GetMapping("/projects")
+    public List<Project> list() {
+        return projectService.listAll();
+    }
 
-	@GetMapping("/projects/{id}")
-	public ResponseEntity<Project> get(@PathVariable Integer id) {
-		try {
-			Project project = projectService.get(id);
-			return new ResponseEntity<Project>(project, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
-		}
-	}
+    @GetMapping("/projects/{id}")
+    public ResponseEntity<Project> get(@PathVariable Integer id) {
+        try {
+            Project project = projectService.get(id);
+            return new ResponseEntity<Project>(project, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-	@PostMapping("/projects")
-	public void add(@RequestBody Project project) {
-		projectService.save(project);
-	}
+    @PostMapping("/projects")
+    public void add(@RequestBody Project project) {
+        projectService.save(project);
+    }
 
-	@PutMapping("/projects/{id}")
-	public ResponseEntity<?> update(@RequestBody Project user, @PathVariable Integer id) {
-		try {
-			Project project = projectService.get(id);
-			projectService.save(project);
-			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+    @PutMapping("/projects/{id}")
+    public ResponseEntity<?> update(@RequestBody Project user, @PathVariable Integer id) {
+        try {
+            Project project = projectService.get(id);
+            projectService.save(project);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-	@DeleteMapping("/projects/{id}")
-	public void delete(@PathVariable Integer id) {
-		projectService.delete(id);
-	}
+    @DeleteMapping("/projects/{id}")
+    public void delete(@PathVariable Integer id) {
+        projectService.delete(id);
+    }
 
 }

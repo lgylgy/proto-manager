@@ -10,38 +10,38 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "projects")
 public class Project {
-	
-	@Column(name="project_id")
-	private Integer projectID;
-	
-	@Column(name="project_name")
-	private String projectName;
-	
-	private String description;
 
-	@Id
+    @Column(name = "project_id")
+    private Integer projectID;
+
+    @Column(name = "project_name")
+    private String projectName;
+
+    private String description;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getProject_ID() {
-		return projectID;
-	}
+    public Integer getProject_ID() {
+        return projectID;
+    }
 
-	public void setProject_ID(Integer projectID) {
-		this.projectID = projectID;
-	}
+    public void setProject_ID(Integer projectID) {
+        this.projectID = projectID;
+    }
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
